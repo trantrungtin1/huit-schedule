@@ -1,16 +1,13 @@
 <?php
-require 'vendor/autoload.php';
+require 'vendor/autoload.php'; // Dòng này rất quan trọng để nạp Faker!
 
-// Nạp các biến từ file .env
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+// Gắn cứng thông tin kết nối thay vì dùng .env
+$host = '127.0.0.1';
+$db   = 'huit_db';
+$user = 'root';
+$pass = ''; // Mặc định Laragon không có mật khẩu
 
 try {
-    $host = $_ENV['DB_HOST'];
-    $db   = $_ENV['DB_DATABASE'];
-    $user = $_ENV['DB_USERNAME'];
-    $pass = $_ENV['DB_PASSWORD'];
-
     $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
